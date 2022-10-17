@@ -1,4 +1,4 @@
-public class ArrayStack<E> implements Stack<E>{
+public class ArrayStack<E> implements Stack<E> {
     private E [] _data;
     private int _size = 0;
     public ArrayStack(){
@@ -14,6 +14,7 @@ public class ArrayStack<E> implements Stack<E>{
             E[] temp = (E[])new Object[_data.length * 2];
             for(int i = 0; i < _data.length; i++){
                 temp[i] = _data[i];
+                _data[i] = null;
             }
             _data = temp;
         }

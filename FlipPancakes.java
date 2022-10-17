@@ -1,10 +1,13 @@
 import java.util.Scanner;
 
 public class FlipPancakes {
+
     public static boolean assertTrue(String argument, String solution){
         FlipPancakes data = new FlipPancakes(argument);
-        return false;
+        data.flipset(solution);
+        return data.isOrdered();
     }
+
     Stack<Integer> _stack;
 
     public FlipPancakes(String input){
@@ -28,6 +31,33 @@ public class FlipPancakes {
         for (int i = 0; i < count; i++) {
             _stack.push(-1 * queue.dequeue());
         }
+    }
+
+    public void flipset(String solution) {
+        Scanner in = new Scanner(solution);
+        int length = in.nextInt();
+        for(int i = 0; i < length; i++){
+            flip(in.nextInt());
+        }
+    }
+
+    public boolean isOrdered(){
+        Stack<Integer> tempstack = new ListStack<>();
+        boolean retval = true;//assume true
+        int lastval = 0;
+        while (!_stack.isEmpty()){
+            int temp = _stack.pop();
+            tempstack.push(temp);
+            if (temp < lastval){// last pancake is larger than the one benieth it, or burnt up.
+                retval = false;//proven false
+                break;
+            }
+            lastval = temp;
+        }
+        while(!tempstack.isEmpty()){
+            _stack.push(tempstack.pop());
+        }
+        return retval;
     }
 
     /**
@@ -57,11 +87,4 @@ public class FlipPancakes {
         return ret.toString();
     }
 
-    public void flipset(String solution) {
-        Scanner in = new Scanner(solution);
-        int length = in.nextInt();
-        for(int i = 0; i < length; i++){
-            flip(in.nextInt());
-        }
-    }
 }
