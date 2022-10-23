@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class AssertPancake {
@@ -10,6 +11,10 @@ public class AssertPancake {
 
     Stack<Integer> _stack;
 
+    /**
+     * generates a pancake stack based on input string
+     * @param input
+     */
     public AssertPancake(String input){
         _stack = new ArrayStack<>();
         Stack<Integer> tempstack = new ArrayStack<>();
@@ -20,6 +25,39 @@ public class AssertPancake {
         }
         while(!tempstack.isEmpty()){
             _stack.push(tempstack.pop());
+        }
+    }
+
+    /**
+     * generates random pancake stack
+     */
+    public AssertPancake(Random r){
+        //random array generation, unique magnitudes and nonzero.
+        int[] arr = new int[r.nextInt(3) + 4];
+        for(int i : arr){
+            i = 0;
+        }
+        int fillsize = arr.length;
+        while (fillsize > 0){
+            int indexpick = r.nextInt(fillsize); //when this is zero push into first zero entry
+            int i = 0;
+            while(indexpick > 0 || arr[i] != 0){
+                if (arr[i] == 0) {
+                    indexpick--;
+                }
+                i++;
+            }
+            if (r.nextInt() % 2 == 1){
+                arr[i] = fillsize;
+            } else {
+                arr[i] = -fillsize;
+            }
+            fillsize--;
+        }
+        //push into stack
+        _stack = new ArrayStack<>();
+        for(int i : arr){
+            _stack.push(i);
         }
     }
 
