@@ -52,7 +52,8 @@ public class FlipPancakes {
 
 	public void calculate(){
 		int top;
-		int temp;
+		int indexhigher;
+		int indexlower;
 		while(notSorted()) {
 			top = _data[0];
 			if (Math.abs(top) == _intHigh) { //If top pancake is largest of unsorted
@@ -62,6 +63,8 @@ public class FlipPancakes {
 				flip(_unsortedLength);
 				continue; // back to start
 			}
+			indexhigher = findHigherMagnitude(top);
+			indexlower = findLowerMagnitude(top);
 			if (Math.abs(top) == _intLow){
 				int index = 0;
 				while(Math.abs(_data[index++]) != _intHigh){}// index = position after intHigh
@@ -70,11 +73,10 @@ public class FlipPancakes {
 			}
 
 			if (top > 0){ // if top pancake is positive....
-				temp = findLowerMagnitude(top);
-				if (_data[temp] > 0){
-					flip(temp+1);
+				if (_data[indexlower] > 0){
+					flip(indexlower+1);
 				} else {
-					flip(temp);
+					flip(indexlower);
 				}
 				//if next lowest magnitude is positive,
 				//if next lowest magnitude is negative, flip that position - 1 sort
@@ -83,11 +85,10 @@ public class FlipPancakes {
 				//find next larger magnitude in array
 				//if next larger magnitude positive, flip  that position -1.
 				//if next larger magnitude negative, flip that position number.
-				temp = findHigherMagnitude(top);
-				if (_data[temp] > 0){
-					flip(temp);
+				if (_data[indexhigher] > 0){
+					flip(indexhigher);
 				} else {
-					flip(temp+1);
+					flip(indexhigher+1);
 				}
 			}
 		}
