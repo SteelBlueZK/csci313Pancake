@@ -22,12 +22,20 @@ public class AssertPancake {
 //        String solution4 = "11 4 6 5 6 3 1 5 1 2 4 2";
 //        String input5 = "6 -3 +2 +5 -4 -1 +6";
 //        String solution5 = "7 1 4 3 4 3 1 5";
-//        input = input5;
+//        String input6 = "6 +3 -4 -1 +2 -5 -6";
+//        String input7 = "6 -3 -5 -6 -2 +4 +1";
+//        String input8 = "5 -3 -2 -4 -5 -1";
+//        String input9 = "6 -4 -5 -6 -2 -3 -1";
+        String input10 = "5 -4 +1 -2 -5 +3";
+        String input11 = "6 +3 +5 -1 +4 -2 -6";
+        String input12 = "5 -1 -4 +5 -2 +3";
+        String input13 = "6 +1 +3 +2 -4 -5 -6";
+//        input = input9;
 //        temp = new FlipPancakes(input);
 //        output = temp.getResult();
 //        System.out.println("test input: " + input + " " + AssertPancake.assertTrue(input, output) + " " + output);
 //        return;
-        final int testcount = 500;
+        final int testcount = 10000;
         double successes = 0;
         for (int i = 0; i < testcount; i++) {
             input = (new AssertPancake(rng)).toString();
@@ -35,7 +43,9 @@ public class AssertPancake {
             output = temp.getResult();
             boolean result = AssertPancake.assertTrue(input, output);
             if (result) {successes+=1;}
-            System.out.println(result + "\t" + input + " : " + output);
+            if (!result) {
+                System.out.println(result + "\t" + input + " : " + output);
+            }
         }
         double rate = successes / testcount;
         System.out.println("success rate: " + rate);

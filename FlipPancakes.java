@@ -65,7 +65,13 @@ public class FlipPancakes {
 			}
 			indexhigher = findHigherMagnitude(top);
 			indexlower = findLowerMagnitude(top);
-			if (Math.abs(top) == _intLow){
+			if(indexhigher == 1){
+				if(_data[indexhigher] < 0 && top < 0){
+					flip(1);
+					flip(2);
+					flip(1);
+					continue;
+				}
 				int index = 0;
 				while(Math.abs(_data[index++]) != _intHigh){}// index = position after intHigh
 				flip(index);
@@ -81,9 +87,12 @@ public class FlipPancakes {
 				flip(indexhigher + 1);
 				flip(indexhigher);
 			} else { //indexhigher < 0 && top < 0
-				flip(1);
-				flip(indexhigher + 1);
-				flip(indexhigher);
+				//TODO:
+				indexhigher += 1;
+				int ts = topSorted();
+				flip(ts);//flip the top sorted section
+				flip(indexhigher);//good
+				flip(indexhigher-ts);// flip (indexhigher + 1 - ts)
 			}
 		}
 	}
@@ -125,6 +134,26 @@ public class FlipPancakes {
 					higher = curr;
 					index = i;
 				}
+			}
+		}
+		return index;
+	}
+
+	/**
+	 * returns number of indexis from the top that are sorted in reletive order
+	 */
+	private int topSorted(){
+		int index = 0;
+		int temp = _data[index++];
+		if (temp > 0){
+			while (_data[index] > 0 && _data[index] < temp){
+				temp = _data[index];
+				index+=1;
+			}
+		} else {
+			while (_data[index] < 0 && _data[index] > temp){
+				temp = _data[index];
+				index+=1;
 			}
 		}
 		return index;
