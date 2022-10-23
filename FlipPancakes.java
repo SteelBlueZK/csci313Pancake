@@ -72,24 +72,18 @@ public class FlipPancakes {
 				continue;
 			}
 
-			if (top > 0){ // if top pancake is positive....
-				if (_data[indexlower] > 0){
-					flip(indexlower+1);
-				} else {
-					flip(indexlower);
-				}
-				//if next lowest magnitude is positive,
-				//if next lowest magnitude is negative, flip that position - 1 sort
-
-			} else { //if top pancake is negative....
-				//find next larger magnitude in array
-				//if next larger magnitude positive, flip  that position -1.
-				//if next larger magnitude negative, flip that position number.
-				if (_data[indexhigher] > 0){
-					flip(indexhigher);
-				} else {
-					flip(indexhigher+1);
-				}
+			if (_data[indexhigher] > 0 && top > 0){
+				flip(1);
+				flip(indexhigher);
+			} else if (_data[indexhigher] > 0 && top < 0) {
+				flip(indexhigher);
+			} else if (_data[indexhigher] < 0 && top > 0){
+				flip(indexhigher + 1);
+				flip(indexhigher);
+			} else { //indexhigher < 0 && top < 0
+				flip(1);
+				flip(indexhigher + 1);
+				flip(indexhigher);
 			}
 		}
 	}
