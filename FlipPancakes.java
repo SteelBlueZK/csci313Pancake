@@ -44,6 +44,9 @@ public class FlipPancakes {
 				_intHigh = Math.max(_intHigh, Math.abs(_data[i]));
 			}
 		}
+		if (_result.size() >= 3*_data.length - 2){ // result flips >= worst case scenario, give up. No infinite loops ever again.
+			_unsortedLength = 0;
+		}
 		return _unsortedLength > 0;
 	}
 
