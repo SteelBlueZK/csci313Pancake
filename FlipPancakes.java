@@ -48,27 +48,88 @@ public class FlipPancakes {
 	}
 
 	public void calculate(){
+		int top;
+		int temp;
 		while(notSorted()) {
-			if (Math.abs(_data[0]) == _intHigh) { //If top pancake is largest of unsorted
-				if (_data[0] > 0) { // is positive
+			top = _data[0];
+			if (Math.abs(top) == _intHigh) { //If top pancake is largest of unsorted
+				if (top > 0) { // is positive
 					flip(1);
 				}
 				flip(_unsortedLength);
 				continue; // back to start
 			}
+			if (Math.abs(top) == _intLow){
+				int index = 0;
+				while(Math.abs(_data[index++]) != _intHigh){}// index = position after intHigh
+				flip(index);
+				continue;
+			}
 
-			if (_data[0] > 0){ // if top pancake is positive....
-				//find next lowest number in array
-				//if next lowest number is positive, flip that position - 1.
-				//if next lowest number is negative,
+			if (top > 0){ // if top pancake is positive....
+				temp = findLowerMagnitude(top);
+				if (_data[temp] > 0){
+					flip(temp+1);
+				} else {
+					flip(temp);
+				}
+				//if next lowest magnitude is positive,
+				//if next lowest magnitude is negative, flip that position - 1 sort
 
 			} else { //if top pancake is negative....
-				//find next larger number in array
-				//if next larger number positive, flip  that position -1.
-				//if next larger number negative, flip that position number.
-
+				//find next larger magnitude in array
+				//if next larger magnitude positive, flip  that position -1.
+				//if next larger magnitude negative, flip that position number.
+				temp = findHigherMagnitude(top);
+				if (_data[temp] > 0){
+					flip(temp);
+				} else {
+					flip(temp+1);
+				}
 			}
 		}
+	}
+
+	/**
+	 * finds number to operate on
+	 * @return array index, -1 if lowest in unsorted section of array.
+	 */
+	private int findLowerMagnitude(int value) {
+		value = Math.abs(value);
+		int index = -1;
+		int lower = -1;
+		int curr;
+		for(int i = 0; i < _unsortedLength; i++){
+			curr = Math.abs(_data[i]);
+			if (curr < value ){
+				if (curr > lower){
+					lower = curr;
+					index = i;
+				}
+			}
+		}
+		return index;
+	}
+
+	/**
+	 * finds number to operate on
+	 * @return array index, -1 if lowest in unsorted section of array.
+	 */
+	private int findHigherMagnitude(int value) {
+		value = Math.abs(value);
+		int index = -1;
+		int higher = Integer.MAX_VALUE;
+		int curr;
+		for(int i = 0; i < _unsortedLength; i++){
+			curr = Math.abs(_data[i]);
+			if (curr > value ){
+				if (curr < higher){
+					higher = curr;
+					index = i;
+				}
+			}
+		}
+		return index;
 	}
 
 	/**
@@ -103,4 +164,3 @@ public class FlipPancakes {
 		return sb.toString();
 	}
 }
-
