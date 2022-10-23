@@ -74,6 +74,11 @@ public class FlipPancakes {
 				}
 				int index = 0;
 				while(Math.abs(_data[index++]) != _intHigh){}// index = position after intHigh
+				if(_data[index-1] != _intHigh){// target burnt side up, get to top preserveing relative order
+					flip(_unsortedLength);
+					flip(_unsortedLength - index + 1);
+					continue;
+				}
 				flip(index);
 				continue;
 			}

@@ -26,16 +26,16 @@ public class AssertPancake {
 //        String input7 = "6 -3 -5 -6 -2 +4 +1";
 //        String input8 = "5 -3 -2 -4 -5 -1";
 //        String input9 = "6 -4 -5 -6 -2 -3 -1";
-        String input10 = "5 -4 +1 -2 -5 +3";
-        String input11 = "6 +3 +5 -1 +4 -2 -6";
-        String input12 = "5 -1 -4 +5 -2 +3";
-        String input13 = "6 +1 +3 +2 -4 -5 -6";
-//        input = input9;
+//        String input10 = "5 -4 +1 -2 -5 +3";
+//        String input11 = "6 +3 +5 -1 +4 -2 -6";
+//        String input12 = "5 -1 -4 +5 -2 +3";
+//        String input13 = "6 +1 +3 +2 -4 -5 -6";
+//        input = input13;
 //        temp = new FlipPancakes(input);
 //        output = temp.getResult();
 //        System.out.println("test input: " + input + " " + AssertPancake.assertTrue(input, output) + " " + output);
 //        return;
-        final int testcount = 10000;
+        final int testcount = 100000;
         double successes = 0;
         for (int i = 0; i < testcount; i++) {
             input = (new AssertPancake(rng)).toString();
@@ -81,7 +81,7 @@ public class AssertPancake {
      */
     public AssertPancake(Random r){
         //random array generation, unique magnitudes and nonzero.
-        int[] arr = new int[r.nextInt(3) + 4];
+        int[] arr = new int[r.nextInt(4) + 7];
         for(int i : arr){
             i = 0;
         }
