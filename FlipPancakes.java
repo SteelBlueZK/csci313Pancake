@@ -1,11 +1,38 @@
 import java.util.Scanner;
 
 public class FlipPancakes {
+	/**
+	 * java FlipPancakes array/list N [pancakes]
+	 * @param args
+	 */
+	public static void main(String[] args){
+		if (args.length < 2){
+			System.out.println("You need more arguments");
+		}
+		Stack<Integer> stack;
+		if (args[0].equals("array")){
+			stack = new ArrayStack<>();
+		} else if(args[0].equals("list")) {
+			stack = new ListStack<>();
+		} else {
+			System.out.println("First argument invalid");
+			return;
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append(args[1]);
+		for(int i = 2; i < args.length; i++){
+			sb.append(" ");
+			sb.append(args[i]);
+		}
+		FlipPancakes solution = new FlipPancakes(sb.toString(), stack);
+		System.out.println(solution.getResult());
+	}
 	private int[] _data;
 	/**
 	 * represents the number of variables at the 'top' that are unsorted.
 	 */
 	private int _unsortedLength;
+	private Stack<Integer> _stack;
 	private Queue<Integer> _result = new LinkedQueue<>();
 	/**
 	 * represents the highest magnitude of the unsorted part of the pancake stack
@@ -20,7 +47,8 @@ public class FlipPancakes {
 	 *
 	 * @param input string of numbers. First number is number of following numbers, next numbers are unique magnitude signed integers
 	 */
-	public FlipPancakes(String input){
+	public FlipPancakes(String input, Stack<Integer> st){
+		_stack = st;//used in private void flip(int count)
 		Scanner in = new Scanner(input);
 		_unsortedLength = in.nextInt();
 		_data = new int[_unsortedLength];
@@ -63,6 +91,12 @@ public class FlipPancakes {
 				flip(_unsortedLength);
 				continue; // back to start
 			}
+			if(_data[_unsortedLength - 1] == -_intHigh){ //optimize bottom element if inverted first
+				flip(_unsortedLength);// this makes question 2 answer better
+				flip(1);
+				flip(_unsortedLength);
+				continue; // back to start
+			}
 			indexhigher = findHigherMagnitude(top);
 			indexlower = findLowerMagnitude(top);
 			if(indexhigher == 1){
@@ -70,17 +104,17 @@ public class FlipPancakes {
 					flip(1);
 					flip(2);
 					flip(1);
-					continue;
+					continue;// back to start
 				}
 				int index = 0;
 				while(Math.abs(_data[index++]) != _intHigh){}// index = position after intHigh
 				if(_data[index-1] != _intHigh){// target burnt side up, get to top preserveing relative order
 					flip(_unsortedLength);
 					flip(_unsortedLength - index + 1);
-					continue;
+					continue;// back to start
 				}
 				flip(index);
-				continue;
+				continue;// back to start
 			}
 
 			if (_data[indexhigher] > 0 && top > 0){
@@ -92,7 +126,6 @@ public class FlipPancakes {
 				flip(indexhigher + 1);
 				flip(indexhigher);
 			} else { //indexhigher < 0 && top < 0
-				//TODO:
 				indexhigher += 1;
 				int ts = topSorted();
 				flip(ts);//flip the top sorted section
@@ -172,12 +205,11 @@ public class FlipPancakes {
 		if(count > _unsortedLength || count < 0){
 			throw new IllegalArgumentException("FlipPancakes.flip() out of acceptable range");
 		}
-		Stack<Integer> temp = new ListStack<>();
 		for(int i = 0; i < count; i++){
-			temp.push(_data[i]);
+			_stack.push(_data[i]);
 		}
 		for(int i = 0; i < count; i++){
-			_data[i] = -1 * temp.pop();
+			_data[i] = -1 * _stack.pop();
 		}
 		_result.enqueue(count);
 	}

@@ -31,7 +31,7 @@ public class AssertPancake {
 //        String input12 = "5 -1 -4 +5 -2 +3";
 //        String input13 = "6 +1 +3 +2 -4 -5 -6";
 //        input = input13;
-//        temp = new FlipPancakes(input);
+//        temp = new FlipPancakes(input, new ListStack<Integer>());
 //        output = temp.getResult();
 //        System.out.println("test input: " + input + " " + AssertPancake.assertTrue(input, output) + " " + output);
 //        return;
@@ -39,7 +39,7 @@ public class AssertPancake {
         double successes = 0;
         for (int i = 0; i < testcount; i++) {
             input = (new AssertPancake(rng)).toString();
-            temp = new FlipPancakes(input);
+            temp = new FlipPancakes(input, new ListStack<Integer>());
             output = temp.getResult();
             boolean result = AssertPancake.assertTrue(input, output);
             if (result) {successes+=1;}
