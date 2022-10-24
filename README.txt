@@ -64,3 +64,8 @@ the least number of flip operations nessisary
 to sort nodes and combine nodes, until there is 
 a single node with the proper orientation left.
 
+
+To run:
+>java FlipPancakes <list|array> <N <1 2 3 .... N>>
+To run random pancakes:
+>java AssertPancake

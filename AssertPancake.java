@@ -35,7 +35,7 @@ public class AssertPancake {
 //        output = temp.getResult();
 //        System.out.println("test input: " + input + " " + AssertPancake.assertTrue(input, output) + " " + output);
 //        return;
-        final int testcount = 100000;
+        final int testcount = 50;
         double successes = 0;
         for (int i = 0; i < testcount; i++) {
             input = (new AssertPancake(rng)).toString();
@@ -43,9 +43,9 @@ public class AssertPancake {
             output = temp.getResult();
             boolean result = AssertPancake.assertTrue(input, output);
             if (result) {successes+=1;}
-            if (!result) {
+//            if (!result) {
                 System.out.println(result + "\t" + input + " : " + output);
-            }
+//            }
         }
         double rate = successes / testcount;
         System.out.println("success rate: " + rate);
@@ -81,7 +81,7 @@ public class AssertPancake {
      */
     public AssertPancake(Random r){
         //random array generation, unique magnitudes and nonzero.
-        int[] arr = new int[r.nextInt(4) + 7];
+        int[] arr = new int[r.nextInt(3) + 4];
         for(int i : arr){
             i = 0;
         }
