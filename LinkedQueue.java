@@ -11,9 +11,9 @@ public class LinkedQueue<E> implements Queue<E> {
         }
     }
 
-    Node<E> _head = null;
-    Node<E> _tail = null;
-    int _size = 0;
+    private Node<E> _head = null;
+    private Node<E> _tail = null;
+    private int _size = 0;
 
     @Override
     public void enqueue(E element) {

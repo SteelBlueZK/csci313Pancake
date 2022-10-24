@@ -1,20 +1,20 @@
 import java.util.Scanner;
 
 public class FlipPancakes {
-	int[] _data;
+	private int[] _data;
 	/**
 	 * represents the number of variables at the 'top' that are unsorted.
 	 */
-	int _unsortedLength;
-	Queue<Integer> _result = new LinkedQueue<>();
+	private int _unsortedLength;
+	private Queue<Integer> _result = new LinkedQueue<>();
 	/**
 	 * represents the highest magnitude of the unsorted part of the pancake stack
 	 */
-	int _intHigh = Integer.MIN_VALUE;
+	private int _intHigh = Integer.MIN_VALUE;
 	/**
 	 * represents lowest magnitude of the pancake sizes
 	 */
-	int _intLow = Integer.MAX_VALUE;
+	private int _intLow = Integer.MAX_VALUE;
 
 	/** generates our instance variables and calls calculate.
 	 *

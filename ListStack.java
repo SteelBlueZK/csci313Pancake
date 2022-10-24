@@ -26,8 +26,8 @@ public class ListStack<E> implements Stack<E> {
         }
     }
 
-    Node<E> _head;
-    int _size = 0;
+    private Node<E> _head;
+    private int _size = 0;
 
     public ListStack(){
         _head = null;

@@ -57,7 +57,7 @@ public class AssertPancake {
         return data.isOrdered();
     }
 
-    Stack<Integer> _stack;
+    private Stack<Integer> _stack;
 
     /**
      * generates a pancake stack based on input string
