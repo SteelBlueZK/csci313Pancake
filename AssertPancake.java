@@ -3,11 +3,25 @@ import java.util.Scanner;
 
 public class AssertPancake {
 
+
+    public static int TEST_COUNT = 10;
+	public static int MIN_STACK_COUNT = 4;
+	public static int STACK_COUNT_VARIANCE = 3;
+	
     /**
      * This is my testing main function
      * @param args
      */
     public static void main(String[] args) {
+        if (args.length >= 1){
+            TEST_COUNT = Integer.parseInt(args[0]);
+        }
+        if (args.length >= 2){
+            MIN_STACK_COUNT = Integer.parseInt(args[1]);
+        }
+        if (args.length >= 3){
+            STACK_COUNT_VARIANCE = Integer.parseInt(args[2]);
+        }
         Random rng = new Random(System.currentTimeMillis());
         String input;
         FlipPancakes temp;
@@ -35,9 +49,9 @@ public class AssertPancake {
 //        output = temp.getResult();
 //        System.out.println("test input: " + input + " " + AssertPancake.assertTrue(input, output) + " " + output);
 //        return;
-        final int testcount = 50;
         double successes = 0;
-        for (int i = 0; i < testcount; i++) {
+        double ratio = 0.0;
+        for (int i = 0; i < TEST_COUNT; i++) {
             input = (new AssertPancake(rng)).toString();
             temp = new FlipPancakes(input, new ListStack<Integer>());
             output = temp.getResult();
@@ -46,9 +60,19 @@ public class AssertPancake {
 //            if (!result) {
                 System.out.println(result + "\t" + input + " : " + output);
 //            }
+            ratio += retrieveFirstNum(output) / retrieveFirstNum(input);
         }
-        double rate = successes / testcount;
+        double rate = successes / TEST_COUNT;
+        ratio = ratio / TEST_COUNT;
         System.out.println("success rate: " + rate);
+        System.out.println("flip ratio [number of flips]/ [stack size]: " + ratio);
+    }
+
+    private static double retrieveFirstNum(String s){
+        Scanner reader = new Scanner(s);
+        double x = reader.nextInt();
+        reader.close();
+        return x;
     }
 
     public static boolean assertTrue(String argument, String solution){
@@ -81,7 +105,7 @@ public class AssertPancake {
      */
     public AssertPancake(Random r){
         //random array generation, unique magnitudes and nonzero.
-        int[] arr = new int[r.nextInt(3) + 4];
+        int[] arr = new int[r.nextInt(STACK_COUNT_VARIANCE) + MIN_STACK_COUNT];
         for(int i : arr){
             i = 0;
         }
