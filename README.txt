@@ -68,4 +68,48 @@ a single node with the proper orientation left.
 To run:
 >java FlipPancakes <list|array> <N <1 2 3 .... N>>
 To run random pancakes:
->java AssertPancake
+
+AssertPancake.class how to:
+
+java AssertPancake [TEST_COUNT MIN_STACK_COUNT STACK_COUNT_VARIANCE]
+	where TEST_COUNT is a positive integer for number of tests to run,
+	MIN_STACK_COUNT is the minimum number of pankakes in a randomly generated stack
+	STACK_COUNT_VARIANCE is a number greater than 1, to generate randomly stacks in the range
+		(MIN_STACK_COUNT, MIN_STACK_COUNT + STACK_COUNT_VARIANCE]
+	TEST_COUNT is default 10,
+	MIN_STACK_COUNT  is default 4
+	STACK_COUNT_VARIANCE is default 3
+	no argument run is 10 random stacks of pancakes between 4 and 6 in length
+
+java AssertPancake [0 N a1 a2 a3... aN-1 aN]
+	By entering 0 for TEST_COUNT, the rest of the argument can be a properly formated input string.
+	This will test the single case specified by user.
+
+AssertPancake is modifiable to test for correctness of pancake algorithm by modifying the 
+generateOutput(String input) command to run aplicable code, perhapse translating input string to
+array of integers to pass to a static main function in another class.
+
+AssertPancake.java is reliant on files:
+Queue.java
+LinkedQueue.java
+Stack.java
+ListStack.java
+
+and may encounter bugs related to the change of details in these files. Besides that, 
+Stack.java
+ListStack.java
+ArrayStack.java
+FlipPankakes.java
+
+can be replaced to hopefully test any in-progress soulution implementation.
+
+You can view what my testing was looking like by running the following terminal commands below.
+
+git clone https://github.com/SteelBlueZK/csci313Pancake.git
+cd csci313Pancake
+git checkout 0b85ac6a2d5601f2a7b007a2b6ac8127dd2256d9
+javac *.java
+java AssertPancake
+
+
+
